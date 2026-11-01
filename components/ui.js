@@ -112,7 +112,7 @@ export function Table({ columns, rows, rowKey, empty = 'Nothing to show yet.' })
         <thead>
           <tr className="border-b border-zinc-200 text-left text-xs uppercase tracking-wide text-zinc-500">
             {columns.map((c) => (
-              <th key={c.key} className={`px-5 py-2 font-medium ${c.className ?? ''}`}>{c.label}</th>
+              <th key={c.key} className={`whitespace-nowrap px-5 py-2 font-medium ${c.className ?? ''}`}>{c.label}</th>
             ))}
           </tr>
         </thead>
@@ -120,7 +120,7 @@ export function Table({ columns, rows, rowKey, empty = 'Nothing to show yet.' })
           {rows.map((row, i) => (
             <tr key={rowKey ? row[rowKey] : i} className="border-b border-zinc-100 last:border-0 hover:bg-zinc-50">
               {columns.map((c) => (
-                <td key={c.key} className={`px-5 py-2.5 text-zinc-700 ${c.className ?? ''}`}>
+                <td key={c.key} className={`whitespace-nowrap px-5 py-2.5 text-zinc-700 ${c.className ?? ''}`}>
                   {c.render ? c.render(row) : row[c.key] ?? '—'}
                 </td>
               ))}

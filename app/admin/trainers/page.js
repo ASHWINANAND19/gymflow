@@ -43,7 +43,6 @@ export default function TrainersPage() {
           columns={[
             { key: 'full_name', label: 'Trainer', render: (t) => <span className="font-medium text-zinc-900">{t.full_name}</span> },
             { key: 'specialization', label: 'Specialization' },
-            { key: 'email', label: 'Email' },
             {
               key: 'active_clients', label: 'Clients',
               render: (t) => <Badge tone={t.utilisation_pct >= 100 ? 'warn' : 'good'}>{t.active_clients} / {t.max_clients}</Badge>,

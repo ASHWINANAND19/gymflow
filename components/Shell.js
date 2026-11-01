@@ -52,7 +52,7 @@ export default function Shell({ role, links, children }) {
           </button>
         </div>
       </aside>
-      <main className="flex-1 px-4 py-6 md:ml-60 md:px-8 md:py-8">
+      <main className="min-w-0 flex-1 px-4 py-6 md:ml-60 md:px-8 md:py-8">
         <div className="mb-4 flex justify-end md:hidden">
           <button onClick={logout} className="text-sm font-medium text-red-600">Log out</button>
         </div>
