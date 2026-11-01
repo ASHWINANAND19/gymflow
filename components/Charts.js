@@ -29,7 +29,7 @@ export function SimpleBarChart({ data, xKey, yKey, label, color = '#059669', for
             </>
           )}
           <Tooltip formatter={(v) => [format(v), label]} />
-          <Bar dataKey={yKey} fill={color} radius={vertical ? [0, 4, 4, 0] : [4, 4, 0, 0]} />
+          <Bar dataKey={yKey} fill={color} isAnimationActive={false} radius={vertical ? [0, 4, 4, 0] : [4, 4, 0, 0]} />
         </BarChart>
       </ResponsiveContainer>
     </div>
@@ -46,7 +46,7 @@ export function SimpleLineChart({ data, xKey, yKey, label, color = '#0284c7', fo
           <XAxis dataKey={xKey} tick={AXIS} />
           <YAxis tick={AXIS} tickFormatter={format} width={48} />
           <Tooltip formatter={(v) => [format(v), label]} />
-          <Line type="monotone" dataKey={yKey} stroke={color} strokeWidth={2} dot={{ r: 3 }} />
+          <Line type="monotone" isAnimationActive={false} dataKey={yKey} stroke={color} strokeWidth={2} dot={{ r: 3 }} />
         </LineChart>
       </ResponsiveContainer>
     </div>
