@@ -278,7 +278,9 @@ async function seed() {
   );
   const assignments = []; // { memberId, trainer }
   const [arjun, , , meera] = trainers;
-  for (const row of eligible) {
+  // The last eligible member is left without a trainer so the admin can
+  // demo assigning one (and being refused by the full trainer)
+  for (const row of eligible.slice(0, -1)) {
     let trainer;
     if (row.member_id === members[0].id) trainer = arjun;
     else if (meera.clients < meera.maxClients) trainer = meera;
