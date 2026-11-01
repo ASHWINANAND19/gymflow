@@ -68,6 +68,8 @@ brew services start postgresql@17
 brew services start mongodb-community@7.0
 ```
 
+Optional, to look at the MongoDB data from a terminal: `brew install mongosh`, then `mongosh gymflow`.
+
 ### 2. Install and configure
 
 ```bash
@@ -145,5 +147,8 @@ proxy.js               Page-level login/role guard
 
 | Name | SRN | Responsibilities |
 |---|---|---|
-| [Member 1 name] | [SRN] | [fill in] |
-| [Member 2 name] | [SRN] | [fill in] |
+| Akarsh Kumar Gupta | PES1UG24AM021 | Relational design (ER diagram, schema, normalisation), constraints, views, indexes and important queries; admin dashboard, member search, plans, payments and audit screens |
+| Aryan Arora | PES1UG24AM055 | Stored procedure and functions, triggers and transactions; authentication and role-based access; memberships, check-in and trainer-assignment APIs and screens |
+| Ashwin Anand | PES1UG24AM057 | MongoDB data model, validators and aggregation pipelines; exercise catalog and the PostgreSQL–MongoDB link; seed data; workout logging, progress and trainer plan screens; app layout and documentation |
+
+A file-by-file breakdown is in [docs/REPORT.md §15](docs/REPORT.md#15-team-contribution).

@@ -5,7 +5,7 @@
 | | |
 |---|---|
 | Project | GymFlow: Gym Membership and Workout Progress Tracker |
-| Team | [Member 1 name] ([SRN]), [Member 2 name] ([SRN]) |
+| Team | Akarsh Kumar Gupta (PES1UG24AM021), Aryan Arora (PES1UG24AM055), Ashwin Anand (PES1UG24AM057) |
 | Stack | Next.js 16 · PostgreSQL 17 · MongoDB 7 |
 | Repository | https://github.com/ASHWINANAND19/gymflow |
 
@@ -837,10 +837,28 @@ GymFlow shows how the choice of database follows from the shape of the data:
 
 ## 15. Team contribution
 
-| Member | Responsibilities |
-|---|---|
-| [Member 1 name] ([SRN]) | [fill in] |
-| [Member 2 name] ([SRN]) | [fill in] |
+The work was split into three areas. Each member owns both database work and the application screens built on it.
+
+| Member | Area | Database work | Application work |
+|---|---|---|---|
+| **Akarsh Kumar Gupta** (PES1UG24AM021) | Relational design and reporting | ER diagram, relational schema, normalisation, data dictionary; tables, keys and constraints; views; indexes and the EXPLAIN ANALYZE study; important queries | Admin dashboard, member search and detail, plans, payments report, audit log |
+| **Aryan Arora** (PES1UG24AM055) | Business rules and security | `purchase_membership` procedure, `days_remaining` and `expire_memberships` functions; the three triggers; transactions | Password hashing, JWT sessions and role checks; member dashboard and check-in; plan purchase; trainer assignment |
+| **Ashwin Anand** (PES1UG24AM057) | MongoDB workout module and UI | MongoDB data model, `$jsonSchema` validators, indexes and aggregation pipelines; exercise catalog table and the PostgreSQL–MongoDB link; setup and seed scripts | Workout logger, progress charts, workout plan views, trainer client page and plan editor, app layout and shared components; README and report |
+
+### Files owned by each member
+
+| Akarsh Kumar Gupta | Aryan Arora | Ashwin Anand |
+|---|---|---|
+| `db/sql/00_drop.sql` | `db/sql/03_functions.sql` | `db/mongo/setup.js` |
+| `db/sql/01_schema.sql` | `db/sql/04_triggers.sql` | `lib/mongo.js`, `lib/mongo/workouts.js`, `lib/mongo/plans.js` |
+| `db/sql/02_alter.sql` | `lib/db.js` (transactions) | `lib/sql/exercises.js`, `lib/validate.js` |
+| `db/sql/05_views.sql` | `lib/auth.js`, `lib/session.js`, `proxy.js` | `scripts/setup-db.js`, `scripts/seed.js` |
+| `db/sql/06_indexes.sql` | `lib/sql/users.js`, `memberships.js`, `checkins.js`, `trainers.js` | `app/api/member/workouts`, `progress`, `workout-plan`; `app/api/trainer/clients/[id]`; `app/api/exercises` |
+| `db/sql/queries.sql` | `lib/http.js` (error handling) | `app/member/workouts`, `progress`, `workout-plan` |
+| `lib/sql/dashboard.js`, `members.js`, `payments.js`, `plans.js`, `audit.js` | `app/api/auth/*`, `app/api/member/{dashboard,check-in,check-out,memberships}` | `app/trainer/**`, `components/PlanEditor.js`, `ProgressCharts.js`, `WorkoutSummary.js`, `PlanView.js` |
+| `app/api/admin/{dashboard,members,plans,payments,audit}` | `app/api/admin/{memberships,trainers,assignments}` | `app/login`, `app/register`, `components/Shell.js`, `ui.js`, `Charts.js`, `lib/client.js` |
+| `app/admin/{page,members,plans,payments,audit}` | `app/member/page.js`, `app/member/plans`, `app/admin/trainers` | `app/admin/exercises`, `README.md`, `docs/` |
+| Tests: views, constraints, member search, plan delete | Tests: triggers, procedure, transactions, auth, check-in/out, cancellation | Tests: `tests/mongo.test.js` |
 
 ## 16. Demo walkthrough
 
