@@ -9,7 +9,7 @@ It is built for the **DBMS Level 3 project** and uses two databases, each for th
 | Users, plans, memberships, payments, check-ins, trainer assignments | **PostgreSQL** | Structured, related data involving money. Needs ACID transactions, foreign keys, constraints and triggers. |
 | Workout sessions and trainer-written workout plans | **MongoDB** | Each exercise has a different shape (sets/reps/kg vs distance/minutes), the data is nested, and it is always read as a whole session. |
 
-The full write-up (ER diagram, relational schema, data dictionary, queries, screenshots and test results) is in **[docs/REPORT.md](docs/REPORT.md)**.
+The full write-up (ER diagram, relational schema, data dictionary, queries, screenshots and test results) is in **[docs/REPORT.md](docs/REPORT.md)**. The same report on the course template is in [docs/GymFlow-Project-Report.docx](docs/GymFlow-Project-Report.docx).
 
 ---
 
