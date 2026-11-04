@@ -34,7 +34,7 @@ FROM payments
 GROUP BY method
 ORDER BY revenue DESC;
 
--- Q4. Correlated subquery: members whose total spend is above the
+-- Q4. Nested subquery: members whose total spend is above the
 --     average total spend of all members
 SELECT u.full_name, member_spend.total
 FROM (
@@ -116,3 +116,27 @@ ROLLBACK;
 EXPLAIN ANALYZE
 SELECT * FROM check_ins
 WHERE member_id = 10 AND check_in_time >= now() - INTERVAL '30 days';
+
+-- Q12. CTE (WITH): revenue per month and the change from the month before
+WITH monthly AS (
+    SELECT date_trunc('month', paid_at)::date AS month_start, SUM(amount) AS revenue
+    FROM payments
+    GROUP BY 1
+)
+SELECT to_char(month_start, 'Mon YYYY') AS month, revenue,
+       revenue - LAG(revenue) OVER (ORDER BY month_start) AS change
+FROM monthly
+ORDER BY month_start;
+
+-- Q13. Recursive CTE: check-ins on each of the last 7 days, including days
+--      with no visits (the recursive part builds the list of dates)
+WITH RECURSIVE last_7_days(day) AS (
+    SELECT current_date - 6
+    UNION ALL
+    SELECT day + 1 FROM last_7_days WHERE day < current_date
+)
+SELECT d.day, to_char(d.day, 'Dy') AS weekday, COUNT(c.check_in_id) AS check_ins
+FROM last_7_days d
+LEFT JOIN check_ins c ON c.check_in_time::date = d.day
+GROUP BY d.day
+ORDER BY d.day;

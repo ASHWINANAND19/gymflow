@@ -411,7 +411,7 @@ All SQL lives in `db/sql/` and runs in order with `npm run db:setup`.
 | `04_triggers.sql` | 3 trigger functions + triggers | CREATE TRIGGER |
 | `05_views.sql` | 4 views | **CREATE VIEW** |
 | `06_indexes.sql` | 4 indexes + 1 partial unique index | **CREATE INDEX** |
-| `queries.sql` | 11 documented queries | DML |
+| `queries.sql` | 13 documented queries | DML |
 
 ### 9.1 Transactions (advanced feature 1)
 
@@ -680,7 +680,36 @@ DELETE FROM plans WHERE plan_id = $1;   -- refused by FK RESTRICT if the plan wa
 DELETE FROM exercises WHERE exercise_id = $1;
 ```
 
-**Q11. Optional filters in one query** (payments report; a NULL parameter switches its filter off)
+**Q11. EXPLAIN ANALYZE.** The query plan for a member's attendance lookup, with and without the index, is in section 9.5.
+
+**Q12. CTE (WITH): revenue per month and the change from the month before**
+```sql
+WITH monthly AS (
+    SELECT date_trunc('month', paid_at)::date AS month_start, SUM(amount) AS revenue
+    FROM payments
+    GROUP BY 1
+)
+SELECT to_char(month_start, 'Mon YYYY') AS month, revenue,
+       revenue - LAG(revenue) OVER (ORDER BY month_start) AS change
+FROM monthly
+ORDER BY month_start;
+```
+
+**Q13. Recursive CTE: check-ins on each of the last 7 days, including days with no visits**
+```sql
+WITH RECURSIVE last_7_days(day) AS (
+    SELECT current_date - 6
+    UNION ALL
+    SELECT day + 1 FROM last_7_days WHERE day < current_date
+)
+SELECT d.day, to_char(d.day, 'Dy') AS weekday, COUNT(c.check_in_id) AS check_ins
+FROM last_7_days d
+LEFT JOIN check_ins c ON c.check_in_time::date = d.day
+GROUP BY d.day
+ORDER BY d.day;
+```
+
+**Optional filters in one query** (`lib/sql/payments.js`, the payments report; a NULL parameter switches its filter off)
 ```sql
 SELECT pay.method, COUNT(*) AS payments, SUM(pay.amount) AS revenue
 FROM payments pay
